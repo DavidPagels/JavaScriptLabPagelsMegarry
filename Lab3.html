@@ -2,9 +2,31 @@
 <html>
 <head>
     <title>Lab 3 Javascript Lab</title>
+    <script src="Functions.js"></script>
+    <script>
+        var allSaves = udrd();
+        function saveContent(){
+            allSaves.save(document.forms.textEditor.content.value());
+        }
+        function undoContent(){
+            document.forms.textEditor.value = allsaves.undo();
+        }
+        function redoContent(){
+
+        }
+    </script>
 </head>
 <body>
-
+<h1>Text Editor 5,000!</h1><br />
+<form name="textEditor">
+    <input type="text" id="content" maxlength="200" /><br />
+    <input type="button" id="saveButton" value="Save" onClick="saveContent()" />
+    <input type="button" id="undoButton" value="Undo" onClick="undoContent()" />
+    <input type="button" id="redoButton" value="Redo" onClick="redoContent()" /> <br />
+    <input type="button" id="textCol" value="Text Color" onClick="saveContent()" />
+    <input type="button" id="backCol" value="Background Color" onClick="saveContent()" />
+    <input type="button" id="textSize" value="Change Font Size" onClick="saveContent()" />
+</form>
 
 
 </body>
