@@ -4,25 +4,43 @@
 
 function udrd(){
     var saved = new Array();
-    var index = 0;
-
-    function save(){
+    var index = 4;
+    var top = index;
+    return{
+    save: function(content){
         index = (index + 1) % 5
-    }
-
-    function undo(){
-        if(index == 0)
-            index = 5;
-        else
-            index--;
+        saved[index]=content;
+        top = index;
         return saved[index];
 
-    }
+    },
 
-    function redo(){
-        index = (index + 1) % 5;
+    undo: function(){
+        var tempIndex = index;
+        // making sure there isn't a null value
+        if(index == 0)
+            tempIndex = 4;
+        else
+            tempIndex--;
+
+        // if not null and not wrapped around
+        if(saved[tempIndex] != null && tempIndex != top){
+            index = tempIndex;
+            return saved[index];
+        }else return saved[index];
+    },
+
+    redo: function(){
+        if(index !=top ){
+            index = (index + 1) % 5;
+            return saved[index];
+        }else return saved[index];
+    },
+
+    isTop: function(){
+        return index == top;
     }
 }
-
+}
 
 module.exports.udrd = udrd;
