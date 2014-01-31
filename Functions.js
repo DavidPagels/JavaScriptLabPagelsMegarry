@@ -39,6 +39,10 @@ function udrd(){
 
     isTop: function(){
         return index == top;
+    },
+
+    isBottom: function(){
+       return (top + 1) % 5 == index;
     }
 }
 }

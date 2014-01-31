@@ -10,14 +10,23 @@
 
             $("#saveButton").click(function(){
                 allSaves.save($("#mainText").val());
+                $("#redoButton").fadeOut("slow");
+
             });
 
             $("#undoButton").click(function(){
                 $("#mainText").val(allSaves.undo());
+                $("#redoButton").fadeIn("slow");
+                if(allSaves.isBottom())
+                    $("#undoButton").fadeOut("slow");
             });
 
             $("#redoButton").click(function(){
                 $("#mainText").val(allSaves.redo());
+                $("#undoButton").fadeIn("slow");
+                if(allSaves.isTop())
+                    $("#redoButton").fadeOut("slow");
+
             });
 
             $("#textCol").click(function(){
@@ -38,7 +47,14 @@
             });
 
             $("#searchButton").click(function(){
+                var searchTex = new RegExp($("#searchText").val(), "gi");
 
+                $("#theText").text($("#mainText").val());
+                $("#theText").html(function(index, val) {
+                    return val.replace((searchTex), '<strong class="searchedText">' + $("#searchText").val() + '</strong>');
+                });
+
+                $(".searchedText").css("background-color", "wheat");
             });
         });
 
@@ -59,8 +75,13 @@
 <p id="numRes"></p>
 <form name="search">
     <input type="text" id="searchText" maxlength="20"/>
-    <input type="button" id="searchButton" value="Search" onClick="searchBox()"/><br/>
+    <input type="button" id="searchButton" value="Search" onClick="searchBox()"/><br/><br/>
 </form>
+
+<p id="theText">
+
+</p>
+
 
 
 </body>
