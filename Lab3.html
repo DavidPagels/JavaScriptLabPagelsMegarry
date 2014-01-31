@@ -3,29 +3,63 @@
 <head>
     <title>Lab 3 Javascript Lab</title>
     <script src="Functions.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>
-        var allSaves = udrd();
-        function saveContent(){
-            allSaves.save(document.forms.textEditor.content.value());
-        }
-        function undoContent(){
-            document.forms.textEditor.value = allsaves.undo();
-        }
-        function redoContent(){
+        $(document).ready(function(){
+            var allSaves = udrd();
 
-        }
+            $("#saveButton").click(function(){
+                allSaves.save($("#mainText").val());
+            });
+
+            $("#undoButton").click(function(){
+                $("#mainText").val(allSaves.undo());
+            });
+
+            $("#redoButton").click(function(){
+                $("#mainText").val(allSaves.redo());
+            });
+
+            $("#textCol").click(function(){
+                $("#mainText").css("color", "SeaGreen");
+            });
+
+            $("#backCol").click(function(){
+                $("#mainText").css("background-color", "Wheat");
+            });
+
+            $("#textSize").click(function(){
+                $("#mainText").css("font-size", "150%");
+            });
+
+            $("#numChars").click(function(){
+                var number = $("#mainText").val().length;
+                $("#numRes").text("Number of Characters (including whitespace):" + $("#mainText").val().length);
+            });
+
+            $("#searchButton").click(function(){
+
+            });
+        });
+
     </script>
 </head>
 <body>
 <h1>Text Editor 5,000!</h1><br />
 <form name="textEditor">
-    <input type="text" id="content" maxlength="200" /><br />
-    <input type="button" id="saveButton" value="Save" onClick="saveContent()" />
-    <input type="button" id="undoButton" value="Undo" onClick="undoContent()" />
-    <input type="button" id="redoButton" value="Redo" onClick="redoContent()" /> <br />
-    <input type="button" id="textCol" value="Text Color" onClick="saveContent()" />
-    <input type="button" id="backCol" value="Background Color" onClick="saveContent()" />
-    <input type="button" id="textSize" value="Change Font Size" onClick="saveContent()" />
+    <textarea id="mainText" cols="50" rows="10"></textarea><br />
+    <input type="button" id="saveButton" value="Save"/>
+    <input type="button" id="undoButton" value="Undo"/>
+    <input type="button" id="redoButton" value="Redo"/> <br />
+    <input type="button" id="textCol" value="Text Color"/>
+    <input type="button" id="backCol" value="Background Color"/>
+    <input type="button" id="textSize" value="Change Font Size"/> <br />
+    <input type="button" id="numChars" value="Number of Characters"/>
+</form>
+<p id="numRes"></p>
+<form name="search">
+    <input type="text" id="searchText" maxlength="20"/>
+    <input type="button" id="searchButton" value="Search" onClick="searchBox()"/><br/>
 </form>
 
 
