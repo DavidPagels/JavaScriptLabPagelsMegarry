@@ -6,11 +6,15 @@ function udrd(){
     var saved = new Array();
     var index = 4;
     var top = index;
+    var curSize = 0;
     return{
     save: function(content){
         index = (index + 1) % 5
         saved[index]=content;
         top = index;
+        if(curSize <5){
+            curSize++;
+        }
         return saved[index];
 
     },
@@ -26,6 +30,7 @@ function udrd(){
         // if not null and not wrapped around
         if(saved[tempIndex] != null && tempIndex != top){
             index = tempIndex;
+            curSize--;
             return saved[index];
         }else return saved[index];
     },
@@ -33,6 +38,7 @@ function udrd(){
     redo: function(){
         if(index !=top ){
             index = (index + 1) % 5;
+            curSize++;
             return saved[index];
         }else return saved[index];
     },
@@ -42,7 +48,7 @@ function udrd(){
     },
 
     isBottom: function(){
-       return (top + 1) % 5 == index;
+       return curSize == 1;
     }
 }
 }

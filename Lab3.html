@@ -29,16 +29,16 @@
 
             });
 
-            $("#textCol").click(function(){
-                $("#mainText").css("color", "SeaGreen");
+            $("#textCol").change(function(){
+                    $("#mainText").css("color", $('#textCol').find(":selected").text());
             });
 
-            $("#backCol").click(function(){
-                $("#mainText").css("background-color", "Wheat");
+            $("#backCol").change(function(){
+                $("#mainText").css("background-color", $('#backCol').find(":selected").text());
             });
 
-            $("#textSize").click(function(){
-                $("#mainText").css("font-size", "150%");
+            $("#textSize").change(function(){
+                $("#mainText").css("font-size", $('#textSize').find(":selected").text());
             });
 
             $("#numChars").click(function(){
@@ -54,28 +54,72 @@
                     return val.replace((searchTex), '<strong class="searchedText">' + $("#searchText").val() + '</strong>');
                 });
 
-                $(".searchedText").css("background-color", "wheat");
+                $(".searchedText").css("background-color", "yellow");
+            });
+
+            $("#doneButton").click(function(){
+               $("#theText").text("");
             });
         });
 
     </script>
 </head>
 <body>
-<h1>Text Editor 5,000!</h1><br />
+<h1>Text Editor 5,000!</h1><br/>
 <form name="textEditor">
+    <label>Text Color:
+    <select id="textCol">
+        <option selected="selected">Black</option>
+        <option>Blue</option>
+        <option>Gold</option>
+        <option>Khaki</option>
+        <option>Maroon</option>
+        <option>Olive</option>
+        <option>Red</option>
+        <option>SteelBlue</option>
+        <option>Sienna</option>
+    </select>
+    </label>
+
+    <label>Background Color:
+    <select id="backCol">
+        <option>Aqua</option>
+        <option>DarkMagenta</option>
+        <option>Green</option>
+        <option>LightCyan</option>
+        <option>OrangeRed</option>
+        <option>Salmon</option>
+        <option>Wheat</option>
+        <option selected="selected">White</option>
+        <option>Yellow</option>
+    </select>
+    </label>
+
+    <label>Text Size:
+    <select id="textSize">
+        <option>10%</option>
+        <option>25%</option>
+        <option>50%</option>
+        <option>75%</option>
+        <option selected="selected">100%</option>
+        <option>125%</option>
+        <option>150%</option>
+        <option>175%</option>
+        <option>200%</option>
+    </select>
+    </label><br/>
+
     <textarea id="mainText" cols="50" rows="10"></textarea><br />
     <input type="button" id="saveButton" value="Save"/>
     <input type="button" id="undoButton" value="Undo"/>
-    <input type="button" id="redoButton" value="Redo"/> <br />
-    <input type="button" id="textCol" value="Text Color"/>
-    <input type="button" id="backCol" value="Background Color"/>
-    <input type="button" id="textSize" value="Change Font Size"/> <br />
+    <input type="button" id="redoButton" value="Redo"/><br/>
     <input type="button" id="numChars" value="Number of Characters"/>
 </form>
 <p id="numRes"></p>
 <form name="search">
     <input type="text" id="searchText" maxlength="20"/>
-    <input type="button" id="searchButton" value="Search" onClick="searchBox()"/><br/><br/>
+    <input type="button" id="searchButton" value="Search" onClick="searchBox()"/><br/>
+    <input type="button" id="doneButton" value="Done"/><br/><br/>
 </form>
 
 <p id="theText">
