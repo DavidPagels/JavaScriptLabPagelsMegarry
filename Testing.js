@@ -55,6 +55,52 @@ describe('Test Undo and Redo', function(){
             assert.equal(vari.undo(), "1")
         })
     });
+    
 });
-
+    
+describe('Test isTop and isBottom', function(){
+   describe('isTop', function(){
+      it('returns true when at the top of the redos', function(){
+         var vari =udrd();
+         vari.save("1");
+         vari.save("2");
+         assert.equal(vari.isTop(), true);
+         vari.undo();
+         assert.equal(vari.isTop(), false);
+      })
+   });
+       
+   describe('isBottom', function(){
+      it('returns true when at the bottom of the undos', function(){
+         var vari = udrd();
+         vari.save("1");
+         vari.save("2");
+         assert.equal(vari.isBottom(), false);
+         vari.undo();
+         assert.equal(vari.isBottom(), true);
+      })
+   });
+   
+   describe('nasty test', function(){
+      it('making the top and bottom at a different possition in the array'{
+         var vari = udrd();
+         vari.save("1");
+         vari.save("2");
+         vari.save("3");
+         vari.save("4");
+         vari.save("5");
+         vari.save("6");
+         assert.equal(vari.isTop(), true);
+         vari.undo();
+         assert.equal(vari.isTop(), false);
+         vari.undo();
+         vari.undo();
+         assert.equal(vari.isBottom(), false);
+         vari.undo();
+         assert.equal(vari.isBottom(), true);
+      })
+   });
+   
+});
+       
 
